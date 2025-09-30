@@ -84,24 +84,15 @@ importers:
 
   packages/bundled:
     dependencies:
-      '@internationalized/date':
-        specifier: ^3.9.0
-        version: 3.9.0
-      '@tanstack/vue-virtual':
-        specifier: ^3.13.12
-        version: 3.13.12(vue@3.5.22(typescript@5.8.2))
       '@vueuse/core':
         specifier: ^13.9.0
         version: 13.9.0(vue@3.5.22(typescript@5.8.2))
       notsapodata:
-        specifier: workspace:^
-        version: link:../../../not-sap/packages/odata
+        specifier: ^0.0.11
+        version: 0.0.11
       notsapui:
-        specifier: workspace:^
-        version: link:../../../not-sap/packages/ui
-      radix-vue:
-        specifier: ^1.9.17
-        version: 1.9.17(vue@3.5.22(typescript@5.8.2))
+        specifier: ^0.0.11
+        version: 0.0.11(@unocss/preset-icons@66.5.2)(postcss@8.5.6)(rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0))(rollup@4.52.3)(typescript@5.8.2)(unocss@66.5.2(postcss@8.5.6)(rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0)))(vue-router@4.5.1(vue@3.5.22(typescript@5.8.2)))(vue@3.5.22(typescript@5.8.2))
       vue:
         specifier: ^3.5.18
         version: 3.5.22(typescript@5.8.2)
@@ -176,11 +167,11 @@ importers:
         specifier: ^13.9.0
         version: 13.9.0(vue@3.5.22(typescript@5.8.2))
       notsapodata:
-        specifier: workspace:^
-        version: link:../../../not-sap/packages/odata
+        specifier: ^0.0.11
+        version: 0.0.11
       notsapui:
-        specifier: workspace:^
-        version: link:../../../not-sap/packages/ui
+        specifier: ^0.0.11
+        version: 0.0.11(@unocss/preset-icons@66.5.2)(postcss@8.5.6)(rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0))(rollup@4.52.3)(typescript@5.8.2)(unocss@66.5.2(postcss@8.5.6)(rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0)))(vue-router@4.5.1(vue@3.5.22(typescript@5.8.2)))(vue@3.5.22(typescript@5.8.2))
       radix-vue:
         specifier: ^1.9.17
         version: 1.9.17(vue@3.5.22(typescript@5.8.2))
@@ -2385,6 +2376,17 @@ packages:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
 
+  notsapodata@0.0.11:
+    resolution: {integrity: sha512-BfbB37nCrsOTNB4FBpMw6pMjghtRIuNw5xjR3EMUWyX21naD3j8DilURH4o1d8H6jNc0Gmh63J0BQ4bqcIUK4w==}
+
+  notsapui@0.0.11:
+    resolution: {integrity: sha512-2QASo7ErCXvL9u60OwKUBuQ/nFm8sXpuN1UkyOWx7J9tvyQU/x2fO0SqE9Gsd6JofpnoIB4hyWETIy4Txl/naQ==}
+    peerDependencies:
+      '@unocss/preset-icons': ^66.5.2
+      unocss: ^66.5.2
+      vue: ^3.5.6
+      vue-router: ^4.4.5
+
   npm-normalize-package-bin@4.0.0:
     resolution: {integrity: sha512-TZKxPvItzai9kN9H/TkmCtx/ZN/hvr3vUycjlfmH0ootY9yFBzNOpiXAdIn1Iteqsvk4lQn6B5PTrt+n6h8k/w==}
     engines: {node: ^18.17.0 || >=20.5.0}
@@ -3900,6 +3902,16 @@ snapshots:
       '@typescript-eslint/types': 8.45.0
       eslint-visitor-keys: 4.2.1
 
+  '@unocss/astro@0.60.4(rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0))(rollup@4.52.3)':
+    dependencies:
+      '@unocss/core': 0.60.4
+      '@unocss/reset': 0.60.4
+      '@unocss/vite': 0.60.4(rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0))(rollup@4.52.3)
+    optionalDependencies:
+      vite: rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0)
+    transitivePeerDependencies:
+      - rollup
+
   '@unocss/astro@0.60.4(rollup@4.52.3)(vite@5.4.20(@types/node@22.18.7)(lightningcss@1.30.2))':
     dependencies:
       '@unocss/core': 0.60.4
@@ -4180,6 +4192,22 @@ snapshots:
   '@unocss/transformer-variant-group@66.5.2':
     dependencies:
       '@unocss/core': 66.5.2
+
+  '@unocss/vite@0.60.4(rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0))(rollup@4.52.3)':
+    dependencies:
+      '@ampproject/remapping': 2.3.0
+      '@rollup/pluginutils': 5.3.0(rollup@4.52.3)
+      '@unocss/config': 0.60.4
+      '@unocss/core': 0.60.4
+      '@unocss/inspector': 0.60.4
+      '@unocss/scope': 0.60.4
+      '@unocss/transformer-directives': 0.60.4
+      chokidar: 3.6.0
+      fast-glob: 3.3.3
+      magic-string: 0.30.19
+      vite: rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0)
+    transitivePeerDependencies:
+      - rollup
 
   '@unocss/vite@0.60.4(rollup@4.52.3)(vite@5.4.20(@types/node@22.18.7)(lightningcss@1.30.2))':
     dependencies:
@@ -5303,6 +5331,32 @@ snapshots:
 
   normalize-path@3.0.0: {}
 
+  notsapodata@0.0.11:
+    dependencies:
+      exceljs: 4.4.0
+      fast-xml-parser: 4.5.3
+
+  notsapui@0.0.11(@unocss/preset-icons@66.5.2)(postcss@8.5.6)(rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0))(rollup@4.52.3)(typescript@5.8.2)(unocss@66.5.2(postcss@8.5.6)(rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0)))(vue-router@4.5.1(vue@3.5.22(typescript@5.8.2)))(vue@3.5.22(typescript@5.8.2)):
+    dependencies:
+      '@internationalized/date': 3.9.0
+      '@tanstack/vue-virtual': 3.13.12(vue@3.5.22(typescript@5.8.2))
+      '@unocss/preset-icons': 66.5.2
+      '@vueuse/core': 11.3.0(vue@3.5.22(typescript@5.8.2))
+      notsapodata: 0.0.11
+      radix-vue: 1.9.17(vue@3.5.22(typescript@5.8.2))
+      unocss: 66.5.2(postcss@8.5.6)(rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0))
+      vue: 3.5.22(typescript@5.8.2)
+      vue-router: 4.5.1(vue@3.5.22(typescript@5.8.2))
+      vunor: 0.0.27(postcss@8.5.6)(rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0))(rollup@4.52.3)(typescript@5.8.2)
+    transitivePeerDependencies:
+      - '@unocss/webpack'
+      - '@vue/composition-api'
+      - postcss
+      - rollup
+      - supports-color
+      - typescript
+      - vite
+
   npm-normalize-package-bin@4.0.0: {}
 
   npm-run-all2@8.0.4:
@@ -5747,6 +5801,35 @@ snapshots:
 
   unicorn-magic@0.3.0: {}
 
+  unocss@0.60.4(postcss@8.5.6)(rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0))(rollup@4.52.3):
+    dependencies:
+      '@unocss/astro': 0.60.4(rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0))(rollup@4.52.3)
+      '@unocss/cli': 0.60.4(rollup@4.52.3)
+      '@unocss/core': 0.60.4
+      '@unocss/extractor-arbitrary-variants': 0.60.4
+      '@unocss/postcss': 0.60.4(postcss@8.5.6)
+      '@unocss/preset-attributify': 0.60.4
+      '@unocss/preset-icons': 0.60.4
+      '@unocss/preset-mini': 0.60.4
+      '@unocss/preset-tagify': 0.60.4
+      '@unocss/preset-typography': 0.60.4
+      '@unocss/preset-uno': 0.60.4
+      '@unocss/preset-web-fonts': 0.60.4
+      '@unocss/preset-wind': 0.60.4
+      '@unocss/reset': 0.60.4
+      '@unocss/transformer-attributify-jsx': 0.60.4
+      '@unocss/transformer-attributify-jsx-babel': 0.60.4
+      '@unocss/transformer-compile-class': 0.60.4
+      '@unocss/transformer-directives': 0.60.4
+      '@unocss/transformer-variant-group': 0.60.4
+      '@unocss/vite': 0.60.4(rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0))(rollup@4.52.3)
+    optionalDependencies:
+      vite: rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0)
+    transitivePeerDependencies:
+      - postcss
+      - rollup
+      - supports-color
+
   unocss@0.60.4(postcss@8.5.6)(rollup@4.52.3)(vite@5.4.20(@types/node@22.18.7)(lightningcss@1.30.2)):
     dependencies:
       '@unocss/astro': 0.60.4(rollup@4.52.3)(vite@5.4.20(@types/node@22.18.7)(lightningcss@1.30.2))
@@ -6020,6 +6103,25 @@ snapshots:
       '@vue/shared': 3.5.22
     optionalDependencies:
       typescript: 5.8.2
+
+  vunor@0.0.27(postcss@8.5.6)(rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0))(rollup@4.52.3)(typescript@5.8.2):
+    dependencies:
+      '@internationalized/date': 3.9.0
+      '@prostojs/palitra': 0.0.3
+      '@unocss/preset-mini': 0.60.4
+      defu: 6.1.4
+      radix-vue: 1.9.17(vue@3.5.22(typescript@5.8.2))
+      unocss: 0.60.4(postcss@8.5.6)(rolldown-vite@7.1.14(@types/node@22.18.7)(jiti@2.6.0))(rollup@4.52.3)
+      vue: 3.5.22(typescript@5.8.2)
+      vue-router: 4.5.1(vue@3.5.22(typescript@5.8.2))
+    transitivePeerDependencies:
+      - '@unocss/webpack'
+      - '@vue/composition-api'
+      - postcss
+      - rollup
+      - supports-color
+      - typescript
+      - vite
 
   vunor@0.0.27(postcss@8.5.6)(rollup@4.52.3)(typescript@5.8.2)(vite@5.4.20(@types/node@22.18.7)(lightningcss@1.30.2)):
     dependencies:

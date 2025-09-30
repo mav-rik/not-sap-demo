@@ -68,16 +68,38 @@ async function init() {
     loading.value = true
     // Get entity set instance to access metadata
     const es = await model.entitySet(props.entitySet)
-    // Extract all field names from the entity type
-    columnsNames.value = Array.from(es.fieldsMap.keys())
-    // Pre-select first 5 fields as default filters
-    filtersNames.value = columnsNames.value.slice(0, 5) as TNorthwindModelOData['entityTypes'][ET]['fields'][]
+    // fieldsMap contains all available fields for this entity type
+    const allFields = Array.from(es.fieldsMap.keys())
 
-    // Configure SmartRecordDialog display settings dynamically
-    recordHeaderFields.value = columnsNames.value.slice(0, 2) // Show first 2 fields in header
-    recordTitle.value = columnsNames.value.find(n => n.search('Name') >= 0) || '' // Use field with "Name" as title
-    recordSubtitle.value = columnsNames.value[0] || '' // Use first field as subtitle
-    recordFieldSearch.value = columnsNames.value.length > 5 // Enable search if many fields
+    // Special configuration for Orders entity set
+    if (props.entitySet === 'Orders') {
+        // Show only key fields relevant for table quick lookup
+        columnsNames.value = ['OrderID', 'CustomerID', 'OrderDate', 'ShipName', 'ShipCity', 'ShipCountry']
+        filtersNames.value = [ 'ShipName', 'ShipCity', 'ShipCountry' ]
+
+        // Record dialog configuration for Orders
+        recordTitle.value = 'CustomerID' // Use CustomerID as title
+        recordSubtitle.value = 'OrderDate' // Use OrderDate as subtitle
+        recordHeaderFields.value = ['OrderID', 'CustomerID', 'EmployeeID', 'OrderDate'] // Main fields in header
+
+        // Group fields logically for the record dialog
+        recordGroups.value = {
+            'Order Information': ['RequiredDate', 'ShippedDate', 'ShipVia'],
+            'Shipping Details': ['ShipName', 'ShipAddress', 'ShipCity', 'ShipRegion', 'ShipPostalCode', 'ShipCountry']
+        }
+
+        recordFieldSearch.value = true
+    } else {
+        // Default configuration for other entity sets
+        columnsNames.value = allFields
+        // Pre-select first 5 fields as default filters
+        filtersNames.value = columnsNames.value.slice(0, 5) as TNorthwindModelOData['entityTypes'][ET]['fields'][]
+
+        // Configure SmartRecordDialog display settings dynamically
+        recordHeaderFields.value = allFields.slice(0, 2) // Show first 2 fields in header
+        recordTitle.value = allFields.find(n => n.search('Name') >= 0) || '' // Use field with "Name" as title
+        recordFieldSearch.value = allFields.length > 5 // Enable search if many fields
+    }
 
     loading.value = false
 }
@@ -103,6 +125,7 @@ const recordTitle = ref('') // Field name to use as dialog title
 const recordSubtitle = ref('') // Field name to use as dialog subtitle
 const recordHeaderFields = ref([] as string[]) // Fields to show in dialog header
 const recordFieldSearch = ref(false) // Enable/disable field search in dialog
+const recordGroups = ref<Record<string, string[]>>() // Field groups for dialog
 </script>
 
 <template>
@@ -251,12 +274,13 @@ const recordFieldSearch = ref(false) // Enable/disable field search in dialog
               Use slots (title, subTitle) to customize the header display.
             -->
             <SmartRecordDialog
-                class="layer-1 rounded-$l min-w-500px"
+                class="layer-1 rounded-$l min-w-500px max-h-88vh"
                 icon="i--details"
                 modal
                 overlay-class="bg-black/50 backdrop-blur-8px"
                 :title-field="recordTitle"
                 :subtitle-field="recordSubtitle"
+                :groups="recordGroups"
                 fetch-data
                 v-model:open="displayDetails"
                 :search="recordFieldSearch"
@@ -265,7 +289,7 @@ const recordFieldSearch = ref(false) // Enable/disable field search in dialog
                 <template v-slot:title v-if="!recordTitle">
                   {{entitySet}}
                 </template>
-                <template v-slot:subTitle>
+                <template v-slot:subTitle v-if="!recordSubtitle">
                   Record Details
                 </template>
             </SmartRecordDialog>

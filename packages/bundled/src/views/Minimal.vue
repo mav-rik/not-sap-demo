@@ -27,11 +27,9 @@
  */
 
 import { NorthwindModel, type TNorthwindModelOData } from '@/.odata.types';
-import ODataEntitySet from 'notsapui/ODataEntitySet.vue'
-import SmartTableRoot from 'notsapui/SmartTableRoot.vue'
-import SmartTable from 'notsapui/SmartTable.vue'
-import SmartRecordDialog from 'notsapui/SmartRecordDialog.vue';
+import { ODataEntitySet, SmartTableRoot, SmartTable, SmartRecordDialog } from 'notsapui'
 import NotSapLogo from '@/components/not-sap-logo.vue';
+import IconDetails from '@/components/icons/IconDetails.vue';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router'
 
@@ -86,10 +84,8 @@ function home() {
 </script>
 
 <template>
-  <section
-    class="layer-2 scope-neutral flex min-h-screen flex-col items-center bg-surface-100 dark:bg-surface-900 md:h-screen md:overflow-hidden py-$xl"
-  >
-    <div class="absolute top-0 flex items-center gap-$l layer-0 bg-opacity-55 backdrop-blur-12px z-10 shadow-lg p-$m scale-70 hover:scale-100 transition-200" style="border-radius: 0 0 1em 1em; transform-origin: 50% 0;" @click="home">
+  <section class="minimal-section layer-2">
+    <div class="minimal-header" @click="home">
       <NotSapLogo small />
     </div>
     <!--
@@ -123,8 +119,8 @@ function home() {
               - Loading states
               - Row click interactions
             -->
-            <div class="rounded-$l overflow-hidden max-h-full max-w-full mx-auto shadow-lg">
-              <SmartTable sticky-header class="max-h-full max-w-full mx-auto layer-0" @item-click="showDetails"></SmartTable>
+            <div class="table-container">
+              <SmartTable sticky-header class="smart-table" @item-click="showDetails"></SmartTable>
             </div>
 
             <!--
@@ -143,16 +139,18 @@ function home() {
               Use slots (title, subTitle) to customize the header display.
             -->
             <SmartRecordDialog
-                class="layer-1 rounded-$l min-w-500px"
-                icon="i--details"
+                class="record-dialog layer-1"
                 modal
-                overlay-class="bg-black/50 backdrop-blur-8px"
+                overlay-class="dialog-overlay"
                 :title-field="recordTitle"
                 fetch-data
                 v-model:open="displayDetails"
                 :search="recordFieldSearch"
                 :record="recordToDisplay"
                 :header-fields="recordHeaderFields">
+                <template v-slot:header-icon>
+                  <IconDetails />
+                </template>
                 <template v-slot:title v-if="!recordTitle">
                   {{entitySet}}
                 </template>
@@ -165,3 +163,72 @@ function home() {
     </ODataEntitySet>
   </section>
 </template>
+
+<style>
+.minimal-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem 0;
+}
+
+.minimal-header {
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--scope-light-0);
+  backdrop-filter: blur(12px);
+  z-index: 10;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  border-radius: 0 0 1em 1em;
+  transform-origin: 50% 0;
+  transform: scale(0.7);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.dark .minimal-header {
+  background-color: var(--scope-dark-0);
+}
+
+.minimal-header:hover {
+  transform: scale(1);
+}
+
+.table-container {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  max-height: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.smart-table {
+  max-height: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  --current-bg: var(--scope-light-0);
+  background-color: rgb(var(--scope-light-0));
+}
+
+.dark .smart-table {
+  --current-bg: var(--scope-dark-0);
+  background-color: rgb(var(--scope-dark-0));
+}
+
+.record-dialog {
+  max-height: 100vh;
+}
+
+@media (min-width: 768px) {
+  .minimal-section {
+    height: 100vh;
+    overflow: hidden;
+  }
+}
+</style>

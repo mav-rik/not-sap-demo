@@ -31,12 +31,10 @@
  */
 
 import { NorthwindModel, type TNorthwindModelOData } from '@/.odata.types';
-import ODataEntitySet from 'notsapui/ODataEntitySet.vue'
-import SmartTableRoot from 'notsapui/SmartTableRoot.vue'
-import SmartTable from 'notsapui/SmartTable.vue'
-import SmartTableFilters from 'notsapui/SmartTableFilters.vue'
-import SmartRecordDialog from 'notsapui/SmartRecordDialog.vue'
-import VuButton from 'vunor/Button.vue'
+import { ODataEntitySet, SmartTableRoot, SmartTable, SmartTableFilters, SmartRecordDialog } from 'notsapui'
+import AppButton from '@/components/AppButton.vue'
+import IconLightDarkLoop from '@/components/icons/IconLightDarkLoop.vue'
+import IconDetails from '@/components/icons/IconDetails.vue'
 import { computed, onMounted, ref } from 'vue';
 import type { TODataFieldsFilters } from 'notsapodata';
 import NotSapLogo from '@/components/not-sap-logo.vue';
@@ -106,9 +104,7 @@ const recordFieldSearch = ref(false) // Enable/disable field search in dialog
 </script>
 
 <template>
-  <section
-    class="layer-1 scope-neutral flex min-h-screen flex-col bg-surface-100 dark:bg-surface-900 md:h-screen md:overflow-hidden"
-  >
+  <section class="advanced-section layer-1">
     <!--
       ODataEntitySet: Root component that connects notsapodata model with notsapui components
       - :model - OData model instance
@@ -147,31 +143,32 @@ const recordFieldSearch = ref(false) // Enable/disable field search in dialog
         >
 
             <!-- Custom layout with sidebar for filters and main content area for table -->
-            <div class="mx-auto flex w-full max-w-[1400px] flex-1 min-h-0 min-w-0 flex-col gap-$m md:flex-row px-$m py-$m">
+            <div class="advanced-layout">
                 <!-- Sidebar: Filter controls and configuration -->
-                <aside class="flex w-full flex-col gap-$m md:w-[260px] md:min-w-[220px] md:flex-shrink-0">
+                <aside class="advanced-sidebar">
 
                     <!-- Header with entity name and controls -->
-                    <h2 class="flex gap-$m items-center m-0 p-0 font-size-14px">
-                        <div class="c8 rotate-90deg i--chevron-down size-20px opacity-60 hover:opacity-100" @click="home"></div>
-                        <span class="opacity-60 inline-block max-w-150px text-ellipsis overflow-hidden">{{ entitySet }}</span>
-                        <div class="flex-grow"></div>
-                        <VuButton
-                            class="c8-flat btn-round btn-square text-grey-800 dark:text-grey-300"
+                    <h2 class="sidebar-header">
+                        <div class="back-button i--chevron-down" @click="home" style="transform: rotate(90deg)"></div>
+                        <span class="entity-name">{{ entitySet }}</span>
+                        <div class="spacer"></div>
+                        <button
+                            class="theme-button"
                             @click="isDark = !isDark"
-                            :icon="isDark ? 'i--light-mode' : 'i--dark-mode'"
-                        />
+                        >
+                          <IconLightDarkLoop />
+                        </button>
                     </h2>
 
                     <!-- Filter configuration button -->
-                    <div class="flex items-center justify-start">
-                        <h4 >Filters</h4>
-                        <div class="flex-grow"></div>
+                    <div class="filter-header">
+                        <h4>Filters</h4>
+                        <div class="spacer"></div>
                         <!-- showConfigDialog('filters') opens a dialog to choose which fields to filter by -->
-                        <VuButton class="c8-flat btn-square" @click="showConfigDialog('filters')" icon="i--config" />
+                        <AppButton class="config-button" @click="showConfigDialog('filters')" icon="i--config" />
                     </div>
 
-                    <div class="flex flex-col gap-4">
+                    <div class="filter-controls">
                         <!--
                           SmartTableFilters: Renders filter UI for each field in filters-names
                           - :filters-names - Array of field names to show filters for
@@ -181,13 +178,13 @@ const recordFieldSearch = ref(false) // Enable/disable field search in dialog
                         <SmartTableFilters :filters-names="filtersNames" />
 
                         <!-- Search button uses queryImmediate from slot props to trigger data fetch -->
-                        <VuButton class="c8-filled" :loading="querying" @click="queryImmediate">
+                        <AppButton class="search-button" :loading="querying" @click="queryImmediate">
                         Search
-                        </VuButton>
+                        </AppButton>
 
                         <!-- Display record counts using slot props -->
-                        <div class="flex w-full justify-end">
-                        <div class="flex gap-$xs text-body-s text-grey-600 dark:text-grey-300 sm:items-end p-$m items-center">
+                        <div class="record-counts">
+                        <div class="record-counts__content">
                             <span>
                             Found {{ inlineCount ?? loadedCount ?? results?.length ?? 0 }} records{{ selectedCount ? ',' : '' }}
                             </span>
@@ -196,24 +193,24 @@ const recordFieldSearch = ref(false) // Enable/disable field search in dialog
                         </div>
 
                         <!-- Show active filter count and clear button when filters are applied -->
-                        <footer v-if="fieldsFiltersCount" class="text-body-s p-$m flex rounded-$m layer-3 items-center justify-between">
+                        <footer v-if="fieldsFiltersCount" class="active-filters">
                             <span>{{ fieldsFiltersCount }} active filters</span>
                             <!-- resetFilters from slot props clears all filter values -->
-                            <VuButton class="c8-flat" @click="resetFilters">
+                            <AppButton class="clear-button" @click="resetFilters">
                                 Clear
-                            </VuButton>
+                            </AppButton>
                         </footer>
                     </div>
 
-                    <div class="flex-grow"></div>
+                    <div class="spacer-grow"></div>
 
-                    <div class="flex gap-$l items-center justify-center">
+                    <div class="sidebar-footer">
                         <NotSapLogo small />
                     </div>
                 </aside>
 
                 <!-- Main content: Data table -->
-                <div class="rounded-$l overflow-hidden">
+                <div class="table-wrapper">
                     <!--
                       SmartTable: Renders the data table with advanced features
                       - sticky-header - Keeps header visible while scrolling
@@ -227,7 +224,7 @@ const recordFieldSearch = ref(false) // Enable/disable field search in dialog
                       - Pagination (virtual scrolling)
                       - Double-click to view record details
                     -->
-                    <SmartTable sticky-header select="multi" class="max-h-full w-full mx-auto layer-0 relative" @item-dbl-click="showDetails"></SmartTable>
+                    <SmartTable sticky-header select="multi" class="advanced-table" @item-dbl-click="showDetails"></SmartTable>
                 </div>
             </div>
 
@@ -251,10 +248,9 @@ const recordFieldSearch = ref(false) // Enable/disable field search in dialog
               Use slots (title, subTitle) to customize the header display.
             -->
             <SmartRecordDialog
-                class="layer-1 rounded-$l min-w-500px"
-                icon="i--details"
+                class="record-dialog layer-1"
                 modal
-                overlay-class="bg-black/50 backdrop-blur-8px"
+                overlay-class="dialog-overlay"
                 :title-field="recordTitle"
                 :subtitle-field="recordSubtitle"
                 fetch-data
@@ -262,6 +258,9 @@ const recordFieldSearch = ref(false) // Enable/disable field search in dialog
                 :search="recordFieldSearch"
                 :record="recordToDisplay"
                 :header-fields="recordHeaderFields">
+                <template v-slot:header-icon>
+                  <IconDetails />
+                </template>
                 <template v-slot:title v-if="!recordTitle">
                   {{entitySet}}
                 </template>
@@ -274,3 +273,180 @@ const recordFieldSearch = ref(false) // Enable/disable field search in dialog
     </ODataEntitySet>
   </section>
 </template>
+
+<style>
+.advanced-section {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.advanced-layout {
+  margin: 0 auto;
+  display: flex;
+  width: 100%;
+  max-width: 1400px;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.advanced-sidebar {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar-header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.back-button {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.back-button:hover {
+  opacity: 1;
+}
+
+.entity-name {
+  opacity: 0.6;
+  display: inline-block;
+  max-width: 150px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.spacer-grow {
+  flex-grow: 1;
+}
+
+.theme-button {
+  background-color: transparent !important;
+  border-radius: 50%;
+  padding: 0rem;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.filter-header h4 {
+  margin: 0;
+}
+
+.config-button {
+  background-color: transparent !important;
+  padding: 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.filter-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.search-button {
+  width: 100%;
+  background-color: var(--primary) !important;
+}
+
+.record-counts {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.record-counts__content {
+  display: flex;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  padding: 0.5rem;
+  align-items: center;
+  opacity: 0.7;
+}
+
+.active-filters {
+  font-size: 0.875rem;
+  padding: 0.5rem;
+  display: flex;
+  border-radius: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.clear-button {
+  background-color: transparent !important;
+  padding: 0.5rem 1rem;
+}
+
+.sidebar-footer {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-wrapper {
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.advanced-table {
+  max-height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  --current-bg: var(--scope-light-0);
+  background-color: rgb(var(--scope-light-0));
+}
+
+.dark .advanced-table {
+  --current-bg: var(--scope-dark-0);
+  background-color: rgb(var(--scope-dark-0));
+}
+
+.record-dialog {
+  max-height: 100vh;
+}
+
+@media (min-width: 768px) {
+  .advanced-section {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .advanced-layout {
+    flex-direction: row;
+  }
+
+  .advanced-sidebar {
+    width: 260px;
+    min-width: 220px;
+    flex-shrink: 0;
+  }
+}
+</style>

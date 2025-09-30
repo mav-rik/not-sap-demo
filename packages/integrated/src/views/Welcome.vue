@@ -15,8 +15,6 @@ const router = useRouter()
 
 const model = NorthwindModel.getInstance()
 
-console.log('MODEL SERVICE', model.service)
-
 const entitySets = ref<Array<{ value: string; label: string }>>([])
 const loading = ref(true)
 

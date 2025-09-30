@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mav-rik/not-sap-demo"
+  },
+  "homepage": "https://github.com/mav-rik/not-sap-demo#readme"
 }

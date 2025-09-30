@@ -18,12 +18,9 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "@internationalized/date": "^3.9.0",
-    "@tanstack/vue-virtual": "^3.13.12",
     "@vueuse/core": "^13.9.0",
-    "notsapodata": "workspace:^",
-    "notsapui": "workspace:^",
-    "radix-vue": "^1.9.17",
+    "notsapodata": "^0.0.11",
+    "notsapui": "^0.0.11",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
   },

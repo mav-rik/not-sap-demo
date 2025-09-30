@@ -53,12 +53,34 @@ async function init() {
     // Get entity set instance to access metadata
     const es = await model.entitySet(props.entitySet)
     // fieldsMap contains all available fields for this entity type
-    columnsNames.value = Array.from(es.fieldsMap.keys())
+    const allFields = Array.from(es.fieldsMap.keys())
 
-    // Configure SmartRecordDialog display settings dynamically
-    recordHeaderFields.value = columnsNames.value.slice(0, 2) // Show first 2 fields in header
-    recordTitle.value = columnsNames.value.find(n => n.search('Name') >= 0) || '' // Use field with "Name" as title
-    recordFieldSearch.value = columnsNames.value.length > 5 // Enable search if many fields
+    // Special configuration for Orders entity set
+    if (props.entitySet === 'Orders') {
+        // Show only key fields relevant for table quick lookup
+        columnsNames.value = ['OrderID', 'CustomerID', 'OrderDate', 'ShipName', 'ShipCity', 'ShipCountry']
+
+        // Record dialog configuration for Orders
+        recordTitle.value = 'CustomerID' // Use CustomerID as title
+        recordSubtitle.value = 'OrderDate' // Use OrderDate as subtitle
+        recordHeaderFields.value = ['OrderID', 'CustomerID', 'EmployeeID', 'OrderDate'] // Main fields in header
+
+        // Group fields logically for the record dialog
+        recordGroups.value = {
+            'Order Information': ['RequiredDate', 'ShippedDate', 'ShipVia'],
+            'Shipping Details': ['ShipName', 'ShipAddress', 'ShipCity', 'ShipRegion', 'ShipPostalCode', 'ShipCountry']
+        }
+
+        recordFieldSearch.value = true
+    } else {
+        // Default configuration for other entity sets
+        columnsNames.value = allFields
+
+        // Configure SmartRecordDialog display settings dynamically
+        recordHeaderFields.value = allFields.slice(0, 2) // Show first 2 fields in header
+        recordTitle.value = allFields.find(n => n.search('Name') >= 0) || '' // Use field with "Name" as title
+        recordFieldSearch.value = allFields.length > 5 // Enable search if many fields
+    }
 
     loading.value = false
 }
@@ -77,8 +99,10 @@ function showDetails(item: Record<string, unknown>) {
 
 // SmartRecordDialog configuration
 const recordTitle = ref('') // Field name to use as dialog title
+const recordSubtitle = ref('') // Field name to use as dialog subtitle
 const recordHeaderFields = ref([] as string[]) // Fields to show in dialog header
 const recordFieldSearch = ref(false) // Enable/disable field search in dialog
+const recordGroups = ref<Record<string, string[]>>() // Field groups for dialog
 
 function home() {
     router.push({ name:'welcome' })
@@ -89,9 +113,9 @@ function home() {
   <section
     class="layer-2 scope-neutral flex min-h-screen flex-col items-center bg-surface-100 dark:bg-surface-900 md:h-screen md:overflow-hidden py-$xl"
   >
-    <div class="absolute top-0 flex items-center gap-$l layer-0 bg-opacity-55 backdrop-blur-12px z-10 shadow-lg p-$m scale-70 hover:scale-100 transition-200" style="border-radius: 0 0 1em 1em; transform-origin: 50% 0;" @click="home">
+    <!-- <div class="absolute top-0 flex items-center gap-$l layer-0 bg-opacity-55 backdrop-blur-12px z-10 shadow-lg p-$m scale-70 hover:scale-100 transition-200" style="border-radius: 0 0 1em 1em; transform-origin: 50% 0;" @click="home">
       <NotSapLogo small />
-    </div>
+    </div> -->
     <!--
       ODataEntitySet: Root component that connects notsapodata model with notsapui components
       - :model - OData model instance (provides metadata and query capabilities)
@@ -143,11 +167,13 @@ function home() {
               Use slots (title, subTitle) to customize the header display.
             -->
             <SmartRecordDialog
-                class="layer-1 rounded-$l min-w-500px"
+                class="layer-1 rounded-$l min-w-500px max-h-88vh"
                 icon="i--details"
                 modal
                 overlay-class="bg-black/50 backdrop-blur-8px"
                 :title-field="recordTitle"
+                :subtitle-field="recordSubtitle"
+                :groups="recordGroups"
                 fetch-data
                 v-model:open="displayDetails"
                 :search="recordFieldSearch"
@@ -156,7 +182,7 @@ function home() {
                 <template v-slot:title v-if="!recordTitle">
                   {{entitySet}}
                 </template>
-                <template v-slot:subTitle>
+                <template v-slot:subTitle v-if="!recordSubtitle">
                   Record Details
                 </template>
             </SmartRecordDialog>

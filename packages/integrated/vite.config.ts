@@ -11,7 +11,7 @@ import proxy from './odata-proxy'
 export default defineConfig({
   plugins: [
     vue(),
-    vueDevTools(),
+    // vueDevTools(),
     UnoCSS(),
     notSapODataVitePlugin({
       services: {
