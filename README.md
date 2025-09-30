@@ -41,7 +41,6 @@ import 'notsapui/styles.css'
 - ✅ Minimal dependencies (just `notsapui` + `notsapodata`)
 - ✅ Quick setup - import CSS and start using
 - ✅ No build configuration needed
-- ✅ Predictable appearance across projects
 - ❌ Limited styling customization
 - ❌ Larger bundle size (includes all styles)
 
@@ -65,7 +64,6 @@ import SmartTableRoot from 'notsapui/SmartTableRoot.vue'
 - ✅ Modern tooling with Vite optimizations
 - ❌ More dependencies (`vunor`, `radix-vue`, `@tanstack/vue-virtual`, etc.)
 - ❌ Requires UnoCSS configuration
-- ❌ More complex setup
 
 [📖 Read integrated package documentation →](https://github.com/mav-rik/not-sap-demo/blob/main/packages/integrated/README.md)
 

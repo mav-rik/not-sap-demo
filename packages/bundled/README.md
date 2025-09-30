@@ -156,7 +156,6 @@ Notice: No UnoCSS plugin, no additional build tooling.
 - **Limited Customization** - Styling limited to CSS variables and custom CSS
 - **Larger Bundle** - Includes all component styles even if unused
 - **Less Flexibility** - Cannot modify component internals or use custom design tokens
-- **Build Overhead** - Components are pre-compiled, can't leverage your build optimizations
 
 ## Project Setup
 
