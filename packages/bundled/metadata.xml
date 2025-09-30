@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="UKDataService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <Annotation Term="Core.Links">
+        <Collection>
+          <Record>
+            <PropertyValue Property="rel" String="author"/>
+            <PropertyValue Property="href" String="https://cap.cloud.sap"/>
+          </Record>
+        </Collection>
+      </Annotation>
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="TBUPartners" EntityType="UKDataService.TBUPartnersParameters">
+          <NavigationPropertyBinding Path="Set/Parameters" Target="TBUPartners"/>
+        </EntitySet>
+      </EntityContainer>
+      <EntityType Name="TBUPartnersType">
+        <Key>
+          <PropertyRef Name="Entity_IN"/>
+          <PropertyRef Name="Entity_IN_issuedBy"/>
+          <PropertyRef Name="Entity_IN_INType"/>
+          <PropertyRef Name="Entity_TIN"/>
+          <PropertyRef Name="Entity_VAT"/>
+          <PropertyRef Name="Entity_Name"/>
+          <PropertyRef Name="Entity_Address_CountryCode"/>
+          <PropertyRef Name="Entity_Address_Free"/>
+          <PropertyRef Name="Entity_Address_Street"/>
+          <PropertyRef Name="Entity_Address_BuildingIdentifier"/>
+          <PropertyRef Name="Entity_Address_SuiteIdentifier"/>
+          <PropertyRef Name="Entity_Address_FloorIdentifier"/>
+          <PropertyRef Name="Entity_Address_DistrictName"/>
+          <PropertyRef Name="Entity_Address_POB"/>
+          <PropertyRef Name="Entity_Address_PostCode"/>
+          <PropertyRef Name="Entity_Address_City"/>
+          <PropertyRef Name="Entity_Address_CountrySubentity"/>
+          <PropertyRef Name="Entity_FinancialIdentifier"/>
+          <PropertyRef Name="Entity_AccountNumberType"/>
+          <PropertyRef Name="Entity_AccountHolderName"/>
+          <PropertyRef Name="Entity_FinancialIdentifierOtherInfo"/>
+          <PropertyRef Name="Entity_PermanentEstablishment"/>
+          <PropertyRef Name="TransportationRental_ConsQ1_currCode"/>
+          <PropertyRef Name="TransportationRental_ConsQ2_currCode"/>
+          <PropertyRef Name="TransportationRental_ConsQ3_currCode"/>
+          <PropertyRef Name="TransportationRental_ConsQ4_currCode"/>
+          <PropertyRef Name="TransportationRental_FeesQ1_currCode"/>
+          <PropertyRef Name="TransportationRental_FeesQ2_currCode"/>
+          <PropertyRef Name="TransportationRental_FeesQ3_currCode"/>
+          <PropertyRef Name="TransportationRental_FeesQ4_currCode"/>
+          <PropertyRef Name="BTL_SOURCE"/>
+          <PropertyRef Name="TransportationRental_TaxQ1_currCode"/>
+          <PropertyRef Name="TransportationRental_TaxQ2_currCode"/>
+          <PropertyRef Name="TransportationRental_TaxQ3_currCode"/>
+          <PropertyRef Name="TransportationRental_TaxQ4_currCode"/>
+          <PropertyRef Name="PersonalService_ConsQ1_currCode"/>
+          <PropertyRef Name="PersonalService_ConsQ2_currCode"/>
+          <PropertyRef Name="PersonalService_ConsQ3_currCode"/>
+          <PropertyRef Name="PersonalService_ConsQ4_currCode"/>
+          <PropertyRef Name="PersonalService_FeesQ1_currCode"/>
+          <PropertyRef Name="PersonalService_FeesQ2_currCode"/>
+          <PropertyRef Name="PersonalService_FeesQ3_currCode"/>
+          <PropertyRef Name="PersonalService_FeesQ4_currCode"/>
+          <PropertyRef Name="PersonalService_TaxQ1_currCode"/>
+          <PropertyRef Name="PersonalService_TaxQ2_currCode"/>
+          <PropertyRef Name="PersonalService_TaxQ3_currCode"/>
+          <PropertyRef Name="PersonalService_TaxQ4_currCode"/>
+          <PropertyRef Name="Entity_Address_legalAddressType"/>
+          <PropertyRef Name="Entity_TIN_issuedBy"/>
+          <PropertyRef Name="Entity_ResCountryCode"/>
+        </Key>
+        <Property Name="Entity_IN" Type="Edm.String" MaxLength="50" Nullable="false"/>
+        <Property Name="Entity_IN_issuedBy" Type="Edm.String" MaxLength="2" Nullable="false"/>
+        <Property Name="Entity_IN_INType" Type="Edm.String" MaxLength="25" Nullable="false"/>
+        <Property Name="Entity_TIN" Type="Edm.String" MaxLength="50" Nullable="false"/>
+        <Property Name="Entity_VAT" Type="Edm.String" MaxLength="50" Nullable="false"/>
+        <Property Name="Entity_Name" Type="Edm.String" MaxLength="200" Nullable="false"/>
+        <Property Name="Entity_Address_CountryCode" Type="Edm.String" MaxLength="2" Nullable="false"/>
+        <Property Name="Entity_Address_Free" Type="Edm.String" MaxLength="5000" Nullable="false"/>
+        <Property Name="Entity_Address_Street" Type="Edm.String" MaxLength="200" Nullable="false"/>
+        <Property Name="Entity_Address_BuildingIdentifier" Type="Edm.String" MaxLength="200" Nullable="false"/>
+        <Property Name="Entity_Address_SuiteIdentifier" Type="Edm.String" MaxLength="200" Nullable="false"/>
+        <Property Name="Entity_Address_FloorIdentifier" Type="Edm.String" MaxLength="200" Nullable="false"/>
+        <Property Name="Entity_Address_DistrictName" Type="Edm.String" MaxLength="200" Nullable="false"/>
+        <Property Name="Entity_Address_POB" Type="Edm.String" MaxLength="200" Nullable="false"/>
+        <Property Name="Entity_Address_PostCode" Type="Edm.String" MaxLength="20" Nullable="false"/>
+        <Property Name="Entity_Address_City" Type="Edm.String" MaxLength="40" Nullable="false"/>
+        <Property Name="Entity_Address_CountrySubentity" Type="Edm.String" MaxLength="80" Nullable="false"/>
+        <Property Name="Entity_FinancialIdentifier" Type="Edm.String" MaxLength="34" Nullable="false"/>
+        <Property Name="Entity_AccountNumberType" Type="Edm.String" MaxLength="200" Nullable="false"/>
+        <Property Name="Entity_AccountHolderName" Type="Edm.String" MaxLength="60" Nullable="false"/>
+        <Property Name="Entity_FinancialIdentifierOtherInfo" Type="Edm.String" MaxLength="200" Nullable="false"/>
+        <Property Name="Entity_PermanentEstablishment" Type="Edm.String" MaxLength="100" Nullable="false"/>
+        <Property Name="TransportationRental_ConsQ1_currCode" Type="Edm.String" MaxLength="13" Nullable="false"/>
+        <Property Name="TransportationRental_ConsQ2_currCode" Type="Edm.String" MaxLength="13" Nullable="false"/>
+        <Property Name="TransportationRental_ConsQ3_currCode" Type="Edm.String" MaxLength="13" Nullable="false"/>
+        <Property Name="TransportationRental_ConsQ4_currCode" Type="Edm.String" MaxLength="13" Nullable="false"/>
+        <Property Name="TransportationRental_FeesQ1_currCode" Type="Edm.String" MaxLength="13" Nullable="false"/>
+        <Property Name="TransportationRental_FeesQ2_currCode" Type="Edm.String" MaxLength="13" Nullable="false"/>
+        <Property Name="TransportationRental_FeesQ3_currCode" Type="Edm.String" MaxLength="13" Nullable="false"/>
+        <Property Name="TransportationRental_FeesQ4_currCode" Type="Edm.String" MaxLength="13" Nullable="false"/>
+        <Property Name="BTL_SOURCE" Type="Edm.String" MaxLength="100" Nullable="false"/>
+        <Property Name="TransportationRental_TaxQ1_currCode" Type="Edm.String" MaxLength="13" Nullable="false"/>
+        <Property Name="TransportationRental_TaxQ2_currCode" Type="Edm.String" MaxLength="13" Nullable="false"/>
+        <Property Name="TransportationRental_TaxQ3_currCode" Type="Edm.String" MaxLength="13" Nullable="false"/>
+        <Property Name="TransportationRental_TaxQ4_currCode" Type="Edm.String" MaxLength="13" Nullable="false"/>
+        <Property Name="PersonalService_ConsQ1_currCode" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="PersonalService_ConsQ2_currCode" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="PersonalService_ConsQ3_currCode" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="PersonalService_ConsQ4_currCode" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="PersonalService_FeesQ1_currCode" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="PersonalService_FeesQ2_currCode" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="PersonalService_FeesQ3_currCode" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="PersonalService_FeesQ4_currCode" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="PersonalService_TaxQ1_currCode" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="PersonalService_TaxQ2_currCode" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="PersonalService_TaxQ3_currCode" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="PersonalService_TaxQ4_currCode" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Entity_Address_legalAddressType" Type="Edm.String" MaxLength="50" Nullable="false"/>
+        <Property Name="Entity_TIN_issuedBy" Type="Edm.String" MaxLength="2" Nullable="false"/>
+        <Property Name="Entity_ResCountryCode" Type="Edm.String" MaxLength="2" Nullable="false"/>
+        <Property Name="TransportationRental_ConsQ1" Type="Edm.Double"/>
+        <Property Name="TransportationRental_ConsQ2" Type="Edm.Double"/>
+        <Property Name="TransportationRental_ConsQ3" Type="Edm.Double"/>
+        <Property Name="TransportationRental_ConsQ4" Type="Edm.Double"/>
+        <Property Name="TransportationRental_NumbQ1" Type="Edm.Int32"/>
+        <Property Name="TransportationRental_NumbQ2" Type="Edm.Int32"/>
+        <Property Name="TransportationRental_NumbQ3" Type="Edm.Int32"/>
+        <Property Name="TransportationRental_NumbQ4" Type="Edm.Int32"/>
+        <Property Name="TransportationRental_FeesQ1" Type="Edm.Double"/>
+        <Property Name="TransportationRental_FeesQ2" Type="Edm.Double"/>
+        <Property Name="TransportationRental_FeesQ3" Type="Edm.Double"/>
+        <Property Name="TransportationRental_FeesQ4" Type="Edm.Double"/>
+        <Property Name="TransportationRental_TaxQ1" Type="Edm.Double"/>
+        <Property Name="TransportationRental_TaxQ2" Type="Edm.Double"/>
+        <Property Name="TransportationRental_TaxQ3" Type="Edm.Double"/>
+        <Property Name="TransportationRental_TaxQ4" Type="Edm.Double"/>
+        <Property Name="PersonalService_ConsQ1" Type="Edm.Double"/>
+        <Property Name="PersonalService_ConsQ2" Type="Edm.Double"/>
+        <Property Name="PersonalService_ConsQ3" Type="Edm.Double"/>
+        <Property Name="PersonalService_ConsQ4" Type="Edm.Double"/>
+        <Property Name="PersonalService_NumbQ1" Type="Edm.Double"/>
+        <Property Name="PersonalService_NumbQ2" Type="Edm.Double"/>
+        <Property Name="PersonalService_NumbQ3" Type="Edm.Double"/>
+        <Property Name="PersonalService_NumbQ4" Type="Edm.Double"/>
+        <Property Name="PersonalService_FeesQ1" Type="Edm.Double"/>
+        <Property Name="PersonalService_FeesQ2" Type="Edm.Double"/>
+        <Property Name="PersonalService_FeesQ3" Type="Edm.Double"/>
+        <Property Name="PersonalService_FeesQ4" Type="Edm.Double"/>
+        <Property Name="PersonalService_TaxQ1" Type="Edm.Double"/>
+        <Property Name="PersonalService_TaxQ2" Type="Edm.Double"/>
+        <Property Name="PersonalService_TaxQ3" Type="Edm.Double"/>
+        <Property Name="PersonalService_TaxQ4" Type="Edm.Double"/>
+        <NavigationProperty Name="Parameters" Type="UKDataService.TBUPartnersParameters" Partner="Set"/>
+      </EntityType>
+      <EntityType Name="TBUPartnersParameters">
+        <Key>
+          <PropertyRef Name="YEAR"/>
+        </Key>
+        <Property Name="YEAR" Type="Edm.String" MaxLength="4" Nullable="false"/>
+        <NavigationProperty Name="Set" Type="Collection(UKDataService.TBUPartnersType)" Partner="Parameters" ContainsTarget="true"/>
+      </EntityType>
+      <Annotations Target="UKDataService.TBUPartnersType">
+        <Annotation Term="Common.Label" String="TBU_VAL_CVQ_TAX_UK_TBUPARTNERINFO"/>
+      </Annotations>
+      <Annotations Target="UKDataService.TBUPartnersParameters/YEAR">
+        <Annotation Term="Common.FieldControl" EnumMember="Common.FieldControlType/Mandatory"/>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx> 

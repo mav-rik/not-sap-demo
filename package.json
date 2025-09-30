@@ -1,0 +1,12 @@
+{
+  "name": "not-sap-demo",
+  "version": "0.0.1",
+  "description": "notsapui + notsapodata demo",
+  "scripts": {
+    "demo-bundled": "pnpm -F bundled dev",
+    "demo-integrated": "pnpm -F integrated dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
