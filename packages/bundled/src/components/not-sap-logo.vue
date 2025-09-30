@@ -9,7 +9,7 @@ defineProps<{ small?: boolean }>()
             <div class="logo-glow__outer"></div>
         </div>
         <img
-            src="https://raw.githubusercontent.com/mav-rik/not-sap/main/notsap.png"
+            src="https://raw.githubusercontent.com/mav-rik/not-sap/main/docs/notsap.png"
             alt="NotSap Logo"
             class="logo-image"
             :class="{ 'logo-image--small': small }"

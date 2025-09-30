@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/mav-rik/not-sap/main/notsap.png" alt="NotSap Logo" width="100" />
+  <img src="https://raw.githubusercontent.com/mav-rik/not-sap/main/docs/notsap.png" alt="NotSap Logo" width="100" />
   <h1>NOTSAPUI Demo</h1>
   <p>Demo applications showcasing <strong>notsapui</strong> and <strong>notsapodata</strong> libraries</p>
 </div>

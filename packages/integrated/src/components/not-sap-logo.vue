@@ -15,7 +15,7 @@ defineProps<{ small?: boolean }>()
             <div class="absolute inset-0 rounded-full opacity-40" style="background: radial-gradient(circle, #00b8f0 0%, transparent 60%); filter: blur(30px);"></div>
         </div>
     <img
-        src="https://raw.githubusercontent.com/mav-rik/not-sap/main/notsap.png"
+        src="https://raw.githubusercontent.com/mav-rik/not-sap/main/docs/notsap.png"
         alt="NotSap Logo"
         class="h-auto relative z-10"
         :class="{
