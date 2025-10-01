@@ -73,8 +73,8 @@ Since `notsapui` is built on top of `vunor` (UnoCSS-based component library) and
 ```json
 {
   "dependencies": {
-    "notsapui": "workspace:^",
-    "notsapodata": "workspace:^",
+    "notsapui": "^0.0.11",
+    "notsapodata": "^0.0.11",
     "vunor": "^0.0.29",
     "radix-vue": "^1.9.17",
     "@internationalized/date": "^3.9.0",
@@ -117,7 +117,7 @@ export default defineConfig({
 
 - `notsapui` components use UnoCSS utility classes for styling
 - `presetVunor` provides the design system (colors, spacing, typography)
-- `notSapUiVunorShortcuts` provides component-specific utility shortcuts
+- `vunorShortcuts(notSapUiVunorShortcuts)` configures UnoCSS shortcuts (combinations of multiple UnoCSS rules under single names) that are used by notsapui components for styling - without these shortcuts, notsapui components won't render with proper styles
 - `notSapIconsPreset` enables icon usage with the `i--icon-name` syntax
 
 ### Vite Plugin Setup

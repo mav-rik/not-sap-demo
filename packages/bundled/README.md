@@ -69,8 +69,8 @@ The bundled approach requires minimal dependencies:
 ```json
 {
   "dependencies": {
-    "notsapui": "workspace:^",
-    "notsapodata": "workspace:^",
+    "notsapui": "^0.0.11",
+    "notsapodata": "^0.0.11",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
   }
