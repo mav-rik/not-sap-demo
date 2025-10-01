@@ -1,21 +1,21 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/mav-rik/not-sap/main/docs/notsap.png" alt="NotSap Logo" width="100" />
   <h1>NOTSAPUI Demo</h1>
-  <p>Demo applications showcasing <strong>notsapui</strong> and <strong>notsapodata</strong> libraries</p>
+  <p>Demos for the <strong>notsapui</strong> and <strong>notsapodata</strong> libraries</p>
 </div>
 
 ## Overview
 
-This monorepo demonstrates two different approaches to integrating the [notsapui](https://github.com/mav-rik/not-sap) component library with OData services. Both demo applications connect to the public Northwind OData V2 service and showcase identical functionality using different integration strategies.
+This repo contrasts two ways to wire [notsapui](https://github.com/mav-rik/not-sap) into an OData-backed Vue app. Both demos target the public Northwind OData V2 service and ship the same flows so you can compare integrations.
 
 **What both demos provide:**
 
-- Full OData V2 integration with automatic TypeScript type generation
-- Smart data tables with sorting, filtering, and pagination
-- Record detail views (read-only in demo; notsapodata supports full CRUD operations)
-- Minimal and Advanced views demonstrating different usage patterns
-- Dark/light theme support
-- Responsive layouts
+- Generated TypeScript types for the OData model
+- Smart tables with sorting, filtering, and pagination
+- Read-only record dialogs (notsapodata supports full CRUD outside the demo)
+- Minimal and Advanced views showing different code paths
+- Light/dark theme toggle
+- Responsive layouts out of the box
 
 **Minimal View:**
 
@@ -29,7 +29,7 @@ This monorepo demonstrates two different approaches to integrating the [notsapui
 
 ### 🎁 Bundled Approach ([packages/bundled](https://github.com/mav-rik/not-sap-demo/tree/main/packages/bundled))
 
-**Plug-and-play solution** with pre-compiled components and styles.
+Prebuilt components with compiled CSS for a plug-and-play experience.
 
 **Import components:**
 ```typescript
@@ -37,18 +37,18 @@ import { ODataEntitySet, SmartTable, SmartTableRoot } from 'notsapui'
 import 'notsapui/styles.css'
 ```
 
-**Key characteristics:**
-- ✅ Minimal dependencies (just `notsapui` + `notsapodata`)
-- ✅ Quick setup - import CSS and start using
-- ✅ No build configuration needed
-- ❌ Limited styling customization
-- ❌ Larger bundle size (includes all styles)
+**Key points:**
+- Minimal dependencies (`notsapui`, `notsapodata`, Vue, Router)
+- Fast start: import the CSS bundle and render
+- No build config changes
+- Styling tweaks limited to CSS variables or overrides
+- Larger bundle because all styles ship together
 
-[📖 Read bundled package documentation →](https://github.com/mav-rik/not-sap-demo/blob/main/packages/bundled/README.md)
+[📖 Read bundled package documentation →](packages/bundled/README.md)
 
 ### 🔧 Integrated Approach ([packages/integrated](https://github.com/mav-rik/not-sap-demo/tree/main/packages/integrated))
 
-**Full control solution** with raw `.vue` components and UnoCSS styling.
+Raw `.vue` components, UnoCSS utilities, and full theming control.
 
 **Import components:**
 ```typescript
@@ -57,33 +57,31 @@ import SmartTable from 'notsapui/SmartTable.vue'
 import SmartTableRoot from 'notsapui/SmartTableRoot.vue'
 ```
 
-**Key characteristics:**
-- ✅ Complete styling control via UnoCSS utilities
-- ✅ Tree-shakeable - smaller production bundles
-- ✅ Access to raw components for deep customization
-- ✅ Modern tooling with Vite optimizations
-- ❌ More dependencies (`vunor`, `radix-vue`, `@tanstack/vue-virtual`, etc.)
-- ❌ Requires UnoCSS configuration
+**Key points:**
+- UnoCSS setup with `vunor`, `radix-vue`, `@tanstack/vue-virtual`, and friends
+- Tree-shakable builds and smaller payloads
+- Access to renderless slots for deep customization
+- Needs UnoCSS configuration and extra peer deps
 
-[📖 Read integrated package documentation →](https://github.com/mav-rik/not-sap-demo/blob/main/packages/integrated/README.md)
+[📖 Read integrated package documentation →](packages/integrated/README.md)
 
 ## Which One to Use?
 
 ### Choose **Bundled** if:
 
-- You're adding notsapui to an **existing project** with established CSS framework
-- Adding UnoCSS would be **difficult or disruptive** to your current setup
-- You want **quick prototyping** or proof-of-concept
-- You prefer **minimal configuration** and dependencies
-- You're okay with **standard component appearance**
+- You are layering notsapui onto an existing styling stack
+- Introducing UnoCSS would be disruptive
+- You need a quick prototype or proof of concept
+- Minimal configuration matters more than custom design
+- Standard component visuals are acceptable
 
 ### Choose **Integrated** if:
 
-- You're starting a **new project** from scratch
-- Your project **already uses UnoCSS** or you're open to adopting it
-- You need **custom styling** and design system integration
-- You want **maximum flexibility** in component customization
-- You prefer **smaller bundle sizes** through tree-shaking
+- You control the design system or already use UnoCSS
+- New projects benefit from granular styling
+- Tree-shaking and bundle size are priorities
+- You want full access to component internals
+- You are comfortable managing extra peer dependencies
 
 ## Running the Demos
 
@@ -101,7 +99,7 @@ pnpm install
 pnpm demo-bundled
 ```
 
-Opens at `http://localhost:5173` (or next available port)
+Serves `http://localhost:5173` (or the next open port).
 
 ### Run Integrated Demo
 
@@ -109,7 +107,7 @@ Opens at `http://localhost:5173` (or next available port)
 pnpm demo-integrated
 ```
 
-Opens at `http://localhost:5174` (or next available port)
+Serves `http://localhost:5174` (or the next open port).
 
 ## Project Structure
 
@@ -139,25 +137,11 @@ not-sap-demo/
 
 ## Technology Stack
 
-Both demos use:
-
-- **Vue 3.5+** with Composition API and TypeScript
-- **Vite** (rolldown-vite) - Rust-based bundler
-- **notsapui** - UI component library for SAP-like interfaces
-- **notsapodata** - OData client library with automatic type generation
-- **Vue Router** - Client-side routing
-- **pnpm** - Package manager
-
-Integrated demo additionally uses:
-
-- **UnoCSS** - Atomic CSS engine
-- **vunor** - UnoCSS-based component library
-- **radix-vue** - Headless component primitives
-- **@tanstack/vue-virtual** - Virtual scrolling
+Both demos use Vue 3.5+, Vite (rolldown-vite), `notsapui`, `notsapodata`, Vue Router, and pnpm. The integrated demo layers in UnoCSS, Vunor, Radix Vue, and `@tanstack/vue-virtual`.
 
 ## Learn More
 
-- [notsapui GitHub Repository](https://github.com/mav-rik/not-sap) - UI component library
+- [notsapui GitHub Repository](https://github.com/mav-rik/not-sap)
 
 ## License
 
